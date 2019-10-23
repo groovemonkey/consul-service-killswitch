@@ -31,7 +31,10 @@ Success! Data written to: service/nginx/enabled
 curl localhost
 curl: (7) Failed to connect to localhost port 80: Connection refused
 
-# Log back out with ctrl-d
+# Enable it again, if you like
+consul kv put service/nginx/enabled "true"
+
+# Log out with ctrl-d
 
 # Cleanup
 vagrant destroy

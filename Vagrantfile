@@ -57,31 +57,28 @@ Vagrant.configure("2") do |config|
 
     systemctl start nginx
 
-    cd /tmp
-    wget https://releases.hashicorp.com/consul/1.6.1/consul_1.6.1_linux_amd64.zip
-    unzip consul_1.6.1_linux_amd64.zip
-    cp consul /usr/local/bin/
-    rm -rf consul_1.6.1_linux_amd64.zip
-
-    cat <<EOF > /etc/consul/server.conf
-
-EOF
+    wget -O /tmp/consul.zip https://releases.hashicorp.com/consul/1.6.1/consul_1.6.1_linux_amd64.zip
+    unzip /tmp/consul.zip -d /usr/local/bin/
   SHELL
 
-    # Add our config files
-    config.vm.provision "file", source: "./config/nginx_killswitch_watch.json", destination: "/tmp/nginx_killswitch_watch.json"
-    config.vm.provision "file", source: "./config/nginx_killswitch_handler.sh", destination: "/tmp/nginx_killswitch_handler.sh"
-    config.vm.provision "file", source: "./config/consul-server.json", destination: "/tmp/server.json"
+  # Add our config files
+  config.vm.provision "file", source: "./config/nginx_killswitch_watch.json", destination: "/tmp/nginx_killswitch_watch.json"
+  config.vm.provision "file", source: "./config/nginx_killswitch_handler.sh", destination: "/tmp/nginx_killswitch_handler.sh"
+  config.vm.provision "file", source: "./config/consul-server.json", destination: "/tmp/server.json"
 
 
-    # Start Consul and add the 'enabled' key
-    config.vm.provision "shell", inline: <<-SHELL
+  # Start Consul and add the 'enabled' key
+  config.vm.provision "shell", inline: <<-SHELL
     # Place config files
-    sudo mv /tmp/nginx_killswitch_watch.json /etc/consul/nginx_killswitch_watch.json
-    sudo mv /tmp/server.json /etc/consul/server.json
-    sudo mv /tmp/nginx_killswitch_handler.sh /usr/local/bin/nginx_killswitch_handler.sh
+    chown root:root /tmp/nginx_killswitch_watch.json
+    chown root:root /tmp/server.json
+    chown root:root /tmp/nginx_killswitch_handler.sh
 
-    sudo chmod +x /usr/local/bin/nginx_killswitch_handler.sh
+    mv /tmp/nginx_killswitch_watch.json /etc/consul/nginx_killswitch_watch.json
+    mv /tmp/server.json /etc/consul/server.json
+    mv /tmp/nginx_killswitch_handler.sh /usr/local/bin/nginx_killswitch_handler.sh
+
+    chmod +x /usr/local/bin/nginx_killswitch_handler.sh
 
     # Start consul and wait for it to come up
     consul agent -config-dir /etc/consul -bootstrap &
