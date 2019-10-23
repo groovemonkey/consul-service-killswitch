@@ -1,0 +1,9 @@
+{
+    "server": true,
+    "ui": true,
+    "data_dir": "/opt/consul",
+    "enable_debug": true,
+    "enable_local_script_checks": true,
+    "enable_syslog": true,
+    "datacenter": "tutorialinux"
+}

@@ -1,0 +1,10 @@
+{
+    "watches": [
+        {
+            "type": "key",
+            "key": "service/nginx/enabled",
+            "handler_type": "script",
+            "args": ["/usr/local/bin/nginx_killswitch_handler.sh", "service/nginx/enabled"]
+        }
+    ]
+}
