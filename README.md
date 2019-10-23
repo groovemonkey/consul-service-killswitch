@@ -40,14 +40,12 @@ consul kv put service/nginx/enabled "true"
 vagrant destroy
 ```
 
-## Visit the Consul UI in your browser
-Not working yet.
-Visit the [Consul UI](http://127.0.0.1:8500/ui)
-
+## Point-and-Click GUI Goodness
+- Visit the nginx server [in your browser](http://localhost:8080/)
+- Visit the Consul UI [in your browser](http://localhost:8500/ui/)
+- Make a change in [the Consul KV Store](http://localhost:8500/ui/tutorialinux/kv/service/nginx/)
+- Confirm that the nginx service has stopped [in your browser](http://localhost:8080/)
 
 
 ## Notes
 Tools like `consul exec` can be a great way to do this flexibly, but it can be slightly complicated to configure and use them safely. For example, `consul exec` should be wired up to vault and require the operator to have a token that lets them use the appropriate role to make changes on the box.
-
-## TODO
-- TODO: get vagrant port forwarding working for the Consul UI (possibly by setting `bind_address` and `ui_address` to the right values? Or passing them with e.g. `-bind '{{ GetInterfaceIP "eth0" }}' -client '{{ GetInterfaceIP "eth0" }}'`? Not sure right now.)

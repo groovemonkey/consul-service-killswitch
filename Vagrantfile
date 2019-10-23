@@ -81,7 +81,7 @@ Vagrant.configure("2") do |config|
     chmod +x /usr/local/bin/nginx_killswitch_handler.sh
 
     # Start consul and wait for it to come up
-    consul agent -config-dir /etc/consul -bootstrap &
+    consul agent -config-dir /etc/consul -bootstrap -bind '{{ GetInterfaceIP "eth0" }}' -client 0.0.0.0 &
     sleep 5
 
     # Add the appropriate key
