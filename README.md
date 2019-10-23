@@ -9,7 +9,7 @@ For example, perhaps you have 100 nodes running some kind of profiling daemon, a
 Wouldn't it be nice to be able to stop -- more or less instantaneously -- a process on all relevant machines by updating a single key in the consul KV store?
 
 ## Demo
-Let's wire up something simple that gives us this behavior. Just install (Vagrant)[https://www.vagrantup.com/] and let's go!
+Let's wire up something simple that gives us this behavior. Just install [Vagrant](https://www.vagrantup.com/) and let's go!
 
 ```
 vagrant up
@@ -38,10 +38,13 @@ vagrant destroy
 ```
 
 ## Visit the Consul UI in your browser
-
-Visit the (Consul UI)[127.0.0.1:8500/ui]
+Not working yet.
+Visit the [Consul UI](127.0.0.1:8500/ui)
 
 
 
 ## Notes
 Tools like `consul exec` can be a great way to do this flexibly, but it can be slightly complicated to configure and use them safely. For example, `consul exec` should be wired up to vault and require the operator to have a token that lets them use the appropriate role to make changes on the box.
+
+## TODO
+- TODO: get vagrant port forwarding working for the Consul UI (possibly by setting `bind_address` and `ui_address` to the right values? Or passing them with e.g. `-bind '{{ GetInterfaceIP "eth0" }}' -client '{{ GetInterfaceIP "eth0" }}'`? Not sure right now.)
