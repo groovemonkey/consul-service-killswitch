@@ -39,7 +39,7 @@ vagrant destroy
 
 ## Visit the Consul UI in your browser
 Not working yet.
-Visit the [Consul UI](127.0.0.1:8500/ui)
+Visit the [Consul UI](http://127.0.0.1:8500/ui)
 
 
 
